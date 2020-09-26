@@ -97,7 +97,7 @@ resource "azurerm_key_vault" "kv" {
   #Service PRinceipal running can access key vault
   access_policy {
     tenant_id = var.tenantId
-    object_id = data.azurerm_client_config.current.service_principal_object_id
+    object_id = data.azurerm_client_config.current.client_id
 
     key_permissions = [
       "Get",
