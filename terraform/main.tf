@@ -89,6 +89,25 @@ resource "azurerm_key_vault" "kv" {
     default_action = "Allow"
     bypass         = "AzureServices"
   }
+  
+  #Service PRinceipal running can access key vault
+  accesst_policy {
+    tenant_id = var.tenantId
+    object_id = data.azurerm_client_config.current.service_principal_object_id
+
+    key_permissions = [
+      "Get",
+      "List",
+      "Update",
+      "create",
+    ]
+
+    secret_permissions = [
+      "Get",
+      "List",
+      "Set",
+    ]
+  }
 }
 
 # ========================================================================
