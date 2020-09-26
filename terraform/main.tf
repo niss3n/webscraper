@@ -101,13 +101,16 @@ resource "azurerm_key_vault_access_policy" "kvap" {
   object_id = azurerm_function_app.fa.identity.0.principal_id
 
   key_permissions = [
-    "get",
+    "Get",
+    "List",
+    "Update",
     "create",
   ]
 
   secret_permissions = [
-    "get",
-    "set",
+    "Get",
+    "List",
+    "Set",
   ]
 }
 
