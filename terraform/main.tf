@@ -1,7 +1,3 @@
-# Data source to access the configuration of the AzureRM provider.
-data "azurerm_client_config" "current" {
-}
-
 # ========================================================================
 # ==========================  Resource Group  ============================
 # ========================================================================
@@ -97,7 +93,7 @@ resource "azurerm_key_vault" "kv" {
   #Service PRinceipal running can access key vault
   access_policy {
     tenant_id = var.tenantId
-    object_id = data.azurerm_client_config.current.client_id
+    object_id = var.serviceConnectionObjId
 
     key_permissions = [
       "Get",
