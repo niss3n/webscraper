@@ -91,7 +91,7 @@ resource "azurerm_key_vault" "kv" {
   }
   
   #Service PRinceipal running can access key vault
-  accesst_policy {
+  access_policy {
     tenant_id = var.tenantId
     object_id = data.azurerm_client_config.current.service_principal_object_id
 
