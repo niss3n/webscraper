@@ -9,3 +9,8 @@ variable "subscriptionId" {
 variable "tenantId" {
     default = "#{tenantId}#"
 }
+
+variable "serviceConnectionObjId" {
+    default = "#{serviceConnectionObjId}#"
+}
+
