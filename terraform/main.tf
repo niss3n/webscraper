@@ -112,8 +112,8 @@ resource "azurerm_key_vault" "kv" {
   }
   
    access_policy {
-    tenant_id = "${data.azurerm_client_config.current.tenant_id}"
-    object_id = "${data.azurerm_client_config.current.object_id}"
+    tenant_id = data.azurerm_client_config.current.tenant_id
+    object_id = data.azurerm_client_config.current.client_id
 	
 
     key_permissions = [
