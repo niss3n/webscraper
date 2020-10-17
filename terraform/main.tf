@@ -73,6 +73,8 @@ resource "azurerm_function_app" "fa" {
 # ========================================================================
 # ==========================  Key Vault  =================================
 # ========================================================================
+data "azurerm_client_config" "current" {}
+
 resource "azurerm_key_vault" "kv" {
   name                        = "bnissenkeyvault"
   location                    = azurerm_resource_group.rg.location
@@ -89,22 +91,27 @@ resource "azurerm_key_vault" "kv" {
     default_action = "Deny"
     bypass         = "AzureServices"
   }
+
+  access_policy {
+    tenant_id = data.azurerm_client_config.current.tenant_id
+    object_id = data.azurerm_client_config.current.object_id
+
+    secret_permissions = [
+      "Get",
+      "List",
+      "Set",
+    ]
+  }
+
 }
 
 # ========================================================================
 # ==========================  Key Vault Access Policy  ===================
 # ========================================================================
-resource "azurerm_key_vault_access_policy" "kvap" {
+resource "azurerm_key_vault_access_policy" "funcAppAccessPolicy" {
   key_vault_id = azurerm_key_vault.kv.id
   tenant_id = azurerm_function_app.fa.identity.0.tenant_id
   object_id = azurerm_function_app.fa.identity.0.principal_id
-
-  key_permissions = [
-    "Get",
-    "List",
-    "Update",
-    "create",
-  ]
 
   secret_permissions = [
     "Get",
