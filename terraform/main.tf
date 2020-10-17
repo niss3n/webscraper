@@ -89,6 +89,7 @@ resource "azurerm_key_vault" "kv" {
 
   network_acls {
     default_action = "Allow"
+    bypass = "None"
   }
 
   access_policy {
