@@ -32,6 +32,16 @@ resource "azurerm_app_service_plan" "asp" {
 }
 
 # ========================================================================
+# ==========================  App Insights  ==============================
+# ========================================================================
+resource "azurerm_application_insights" "ai" {
+  name                = "tf-test-appinsights"
+  location            = azurerm_resource_group.rg.location
+  resource_group_name = azurerm_resource_group.rg.name
+  application_type    = "web"
+}
+
+# ========================================================================
 # ==========================  Function App  ==============================
 # ========================================================================
 resource "azurerm_function_app" "fa" {
@@ -53,21 +63,11 @@ resource "azurerm_function_app" "fa" {
       "APPINSIGHTS_INSTRUMENTATIONKEY" = azurerm_application_insights.ai.instrumentation_key
       "APPLICATIONINSIGHTS_CONNETION_STRING" = azurerm_application_insights.ai.id
       # secrets...
-      "SendGridApiKey" = "@Microsoft.KeyVault(SecretUri=${azurerm_key_vault_secret.SendGridApiKey.id})"
-      "SubscriptionId" = "@Microsoft.KeyVault(SecretUri=${azurerm_key_vault_secret.SubscriptionId.id})"
-      "TenantId"       = "@Microsoft.KeyVault(SecretUri=${azurerm_key_vault_secret.TenantId.id})"
+      # "SendGridApiKey" = "@Microsoft.KeyVault(SecretUri=${azurerm_key_vault_secret.SendGridApiKey.id})"
+      # "SubscriptionId" = "@Microsoft.KeyVault(SecretUri=${azurerm_key_vault_secret.SubscriptionId.id})"
+      # "TenantId"       = "@Microsoft.KeyVault(SecretUri=${azurerm_key_vault_secret.TenantId.id})"
   }
 
-}
-
-# ========================================================================
-# ==========================  App Insights  ==============================
-# ========================================================================
-resource "azurerm_application_insights" "ai" {
-  name                = "tf-test-appinsights"
-  location            = azurerm_resource_group.rg.location
-  resource_group_name = azurerm_resource_group.rg.name
-  application_type    = "web"
 }
 
 # ========================================================================
@@ -96,7 +96,6 @@ resource "azurerm_key_vault" "kv" {
 # ========================================================================
 resource "azurerm_key_vault_access_policy" "kvap" {
   key_vault_id = azurerm_key_vault.kv.id
-
   tenant_id = azurerm_function_app.fa.identity.0.tenant_id
   object_id = azurerm_function_app.fa.identity.0.principal_id
 
