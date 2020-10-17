@@ -102,7 +102,16 @@ resource "azurerm_key_vault" "kv" {
       "Set",
     ]
   }
+  access_policy {
+    tenant_id = var.tenantId
+    object_id = var.serviceConnectionObjId
 
+    secret_permissions = [
+      "Get",
+      "List",
+      "Set",
+    ]
+  }
 }
 
 # ========================================================================
