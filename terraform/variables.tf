@@ -13,4 +13,3 @@ variable "tenantId" {
 variable "serviceConnectionObjId" {
     default = "#{serviceConnectionObjId}#"
 }
-

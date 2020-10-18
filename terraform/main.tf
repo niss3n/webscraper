@@ -34,6 +34,16 @@ resource "azurerm_app_service_plan" "asp" {
 }
 
 # ========================================================================
+# ==========================  App Insights  ==============================
+# ========================================================================
+resource "azurerm_application_insights" "ai" {
+  name                = "tf-test-appinsights"
+  location            = azurerm_resource_group.rg.location
+  resource_group_name = azurerm_resource_group.rg.name
+  application_type    = "web"
+}
+
+# ========================================================================
 # ==========================  Function App  ==============================
 # ========================================================================
 resource "azurerm_function_app" "fa" {
@@ -63,20 +73,12 @@ resource "azurerm_function_app" "fa" {
 }
 
 # ========================================================================
-# ==========================  App Insights  ==============================
-# ========================================================================
-resource "azurerm_application_insights" "ai" {
-  name                = "tf-test-appinsights"
-  location            = azurerm_resource_group.rg.location
-  resource_group_name = azurerm_resource_group.rg.name
-  application_type    = "web"
-}
-
-# ========================================================================
 # ==========================  Key Vault  =================================
 # ========================================================================
+data "azurerm_client_config" "current" {}
+
 resource "azurerm_key_vault" "kv" {
-  name                        = "bnissenkeyvault"
+  name                        = "bnissenkeyvaulttwo"
   location                    = azurerm_resource_group.rg.location
   resource_group_name         = azurerm_resource_group.rg.name
   enabled_for_disk_encryption = true
@@ -89,62 +91,26 @@ resource "azurerm_key_vault" "kv" {
 
   network_acls {
     default_action = "Allow"
-    bypass         = "AzureServices"
+    bypass = "None"
   }
-  
-  #Service PRinceipal running can access key vault
+
   access_policy {
     tenant_id = var.tenantId
-    object_id = var.serviceConnectionObjId
-
-    key_permissions = [
-      "Get",
-      "List",
-      "Update",
-      "create",
-    ]
+    object_id = data.azurerm_client_config.current.object_id
 
     secret_permissions = [
       "Get",
-      "List",
       "Set",
     ]
-  }
-  
-   access_policy {
-    tenant_id = data.azurerm_client_config.current.tenant_id
-    object_id = data.azurerm_client_config.current.client_id
-	
-
-    key_permissions = [
-      "get",
-	  "list",
-	  "create",
-    ]
-
-    secret_permissions = [
-      "get",
-	  "list",
-	  "set",
-    ]
-  }
 }
 
 # ========================================================================
 # ==========================  Key Vault Access Policy  ===================
 # ========================================================================
-resource "azurerm_key_vault_access_policy" "kvap" {
+resource "azurerm_key_vault_access_policy" "funcAppAccessPolicy" {
   key_vault_id = azurerm_key_vault.kv.id
-
   tenant_id = azurerm_function_app.fa.identity.0.tenant_id
   object_id = azurerm_function_app.fa.identity.0.principal_id
-
-  key_permissions = [
-    "Get",
-    "List",
-    "Update",
-    "create",
-  ]
 
   secret_permissions = [
     "Get",
