@@ -89,19 +89,9 @@ resource "azurerm_key_vault" "kv" {
 
   network_acls {
     default_action = "Allow"
-    bypass = "AzureServices"
+    bypass = "None"
   }
-
-  access_policy {
-    tenant_id = data.azurerm_client_config.current.tenant_id
-    object_id = data.azurerm_client_config.current.client_id
-
-    secret_permissions = [
-      "Get",
-      "List",
-      "Set",
-    ]
-  }
+  
   access_policy {
     tenant_id = var.tenantId
     object_id = data.azurerm_client_config.current.object_id
