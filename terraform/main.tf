@@ -63,9 +63,9 @@ resource "azurerm_function_app" "fa" {
       "APPINSIGHTS_INSTRUMENTATIONKEY" = azurerm_application_insights.ai.instrumentation_key
       "APPLICATIONINSIGHTS_CONNETION_STRING" = azurerm_application_insights.ai.id
       # secrets...
-      # "SendGridApiKey" = "@Microsoft.KeyVault(SecretUri=${azurerm_key_vault_secret.SendGridApiKey.id})"
-      # "SubscriptionId" = "@Microsoft.KeyVault(SecretUri=${azurerm_key_vault_secret.SubscriptionId.id})"
-      # "TenantId"       = "@Microsoft.KeyVault(SecretUri=${azurerm_key_vault_secret.TenantId.id})"
+      "SendGridApiKey" = "@Microsoft.KeyVault(SecretUri=${azurerm_key_vault_secret.SendGridApiKey.id})"
+      "SubscriptionId" = "@Microsoft.KeyVault(SecretUri=${azurerm_key_vault_secret.SubscriptionId.id})"
+      "TenantId"       = "@Microsoft.KeyVault(SecretUri=${azurerm_key_vault_secret.TenantId.id})"
   }
 
 }
@@ -91,7 +91,7 @@ resource "azurerm_key_vault" "kv" {
     default_action = "Allow"
     bypass = "None"
   }
-  
+
   access_policy {
     tenant_id = var.tenantId
     object_id = data.azurerm_client_config.current.object_id
