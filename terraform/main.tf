@@ -58,14 +58,14 @@ resource "azurerm_function_app" "fa" {
   }
 
   app_settings = {
-      "WEBSITE_RUN_FROM_PACKAGE" = "1",
-      "FUNCTIONS_WORKER_RUNTIME" = "python"
-      "APPINSIGHTS_INSTRUMENTATIONKEY" = azurerm_application_insights.ai.instrumentation_key
-      "APPLICATIONINSIGHTS_CONNETION_STRING" = azurerm_application_insights.ai.id
-      # secrets...
-      "SendGridApiKey" = "@Microsoft.KeyVault(SecretUri=${azurerm_key_vault_secret.SendGridApiKey.id})"
-      "SubscriptionId" = "@Microsoft.KeyVault(SecretUri=${azurerm_key_vault_secret.SubscriptionId.id})"
-      "TenantId"       = "@Microsoft.KeyVault(SecretUri=${azurerm_key_vault_secret.TenantId.id})"
+    "WEBSITE_RUN_FROM_PACKAGE" = "1",
+    "FUNCTIONS_WORKER_RUNTIME" = "python"
+    "APPINSIGHTS_INSTRUMENTATIONKEY" = azurerm_application_insights.ai.instrumentation_key
+    "APPLICATIONINSIGHTS_CONNETION_STRING" = azurerm_application_insights.ai.id
+    # secrets...
+    "SendGridApiKey" = "@Microsoft.KeyVault(SecretUri=${azurerm_key_vault_secret.SendGridApiKey.id})"
+    "SubscriptionId" = "@Microsoft.KeyVault(SecretUri=${azurerm_key_vault_secret.SubscriptionId.id})"
+    "TenantId"       = "@Microsoft.KeyVault(SecretUri=${azurerm_key_vault_secret.TenantId.id})"
   }
 
 }
@@ -76,7 +76,11 @@ resource "azurerm_function_app" "fa" {
 data "azurerm_client_config" "current" {}
 
 resource "azurerm_key_vault" "kv" {
+<<<<<<< HEAD
   name                        = "bnissenkeyvaulttwo"
+=======
+  name                        = "bnissenkeyvaultt"
+>>>>>>> master
   location                    = azurerm_resource_group.rg.location
   resource_group_name         = azurerm_resource_group.rg.name
   enabled_for_disk_encryption = true
