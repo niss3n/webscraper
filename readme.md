@@ -1,41 +1,55 @@
-Develop:  [![Build status](https://dev.azure.com/bradanissen/Github%20Repos/_apis/build/status/Terraform-CI-Develop)](https://dev.azure.com/bradanissen/Github%20Repos/_build/latest?definitionId=5)
+[![Build status](https://dev.azure.com/bradanissen/Github%20Repos/_apis/build/status/Terraform-CI)](https://dev.azure.com/bradanissen/Github%20Repos/_build/latest?definitionId=4)
 
- Master:  [![Build status](https://dev.azure.com/bradanissen/Github%20Repos/_apis/build/status/Terraform-CI)](https://dev.azure.com/bradanissen/Github%20Repos/_build/latest?definitionId=4)
+[Azure Release Pipeline](https://dev.azure.com/bradanissen/Github%20Repos/_release?_a=releases&view=mine&definitionId=1)
 
-Deploy Infrastructure: [Azure Release](https://dev.azure.com/bradanissen/Github%20Repos/_release?_a=releases&view=mine&definitionId=1)
+# **Welcome to the Webscaper project!**
 
-# Welcome to the Webscaper project!
-
-## Overview
+## **Overview**
 
 Since the beginning of COVID, buying weights has been nearly impossible (for a reasonable price)! I want to search for in-stock alerts from websites, and when they are available to buy, send an email. 
 
 You might be asking... Why not just sign up for email alerts? Because there's no fun in that!
 
-## How to contribute?
-If you want to conribute, please checkout the issues tab to find something you want to work on. I'm always open to suggestions if you want to take this and run with it. 
+## **How to contribute?**
+If you want to conribute, please checkout the Issues tab and find something you want to work on. I'm always open to suggestions if you want to take something and run with it!
 
 <br/>
 
-*To pull the repo down locally. Navigate to where you want to store the repo and paste the following commands* 
+
+## **Get Webscraper working locally**
+
+*1. Pull down the code to your local computer*
 ```
-git clone https://github.com/niss3n/webscraper.git
+git clone https://github.com/niss3n/webscraper.git 
 ```
 
-
-*Open your files up in Visual Studo Code*
+*2. Open your files up in Visual Studo Code (my text editor of choice)*
 ```
-code .
+cd webscraper
 ```
 
-*Start the virtual environment(this has the package need so far)*
+*3a. On MacOS or Linux*
 ```
- source virtualenv/bin/activate
- ```
+python3 -m venv env
+source env/bin/activate
+pip install -r requirements.txt
+```
 
-*once the virutal environemnt has started, try running it!*
+*3b. On Windows*
+```
+py -m venv env
+.\env\Scripts\activate
+pip install -r requirements.txt
+```
+
+*4. After the virtual environment starts and the packages are installed, try running the code!*
 ```
 python webscraper.py
+```
+
+*Run this command to kill the virtual environement (a.k.a, env)*
+```
+deactivate
 ```
 
 <br/>
