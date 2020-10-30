@@ -44,7 +44,7 @@ pip install -r requirements.txt
 
 *4. After the virtual environment starts and the packages are installed, try running the code!*
 ```
-python webscraper.py
+python webscaper.py
 ```
 
 *Run this command to kill the virtual environement (a.k.a, env)*
