@@ -1,7 +1,4 @@
-[![Build status](https://dev.azure.com/bradanissen/Github%20Repos/_apis/build/status/Terraform-CI)](https://dev.azure.com/bradanissen/Github%20Repos/_build/latest?definitionId=4)
-
-[Azure Release Pipeline](https://dev.azure.com/bradanissen/Github%20Repos/_release?_a=releases&view=mine&definitionId=1)
-
+[![Terraform](https://github.com/niss3n/webscraper/actions/workflows/deployment.yml/badge.svg)](https://github.com/niss3n/webscraper/actions/workflows/deployment.yml)
 # **Welcome to the Webscaper project!**
 
 ## **Overview**
