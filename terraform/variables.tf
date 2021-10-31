@@ -1,15 +1,6 @@
-variable "sendGridApiKey" {
-    default = "#{sendGridApiKey}#"
-}
-
-variable "subscriptionId" {
-    default = "#{subscriptionId}#"
-}
-
-variable "tenantId" {
-    default = "#{tenantId}#"
-}
-
-variable "serviceConnectionObjId" {
-    default = "#{serviceConnectionObjId}#"
-}
+variable "sendgrid_api_key" {}
+variable "client_id" {}
+variable "client_secret" {}
+variable "subscription_id" {}
+variable "tenant_id" {}
+variable "service_connection_obj_id" {}
